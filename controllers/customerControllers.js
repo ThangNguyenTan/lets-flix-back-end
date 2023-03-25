@@ -1073,6 +1073,7 @@ const customerSignup = async (req, res) => {
       username,
       email,
       password,
+      validated: true,
       stripeCustomerID: stripeCustomer.id
     }).save();
 

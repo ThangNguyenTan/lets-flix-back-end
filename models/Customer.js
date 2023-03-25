@@ -26,7 +26,7 @@ const schema = new Schema({
     },
     validated: {
         type: Boolean,
-        default: false
+        default: true
     },
     last_modified_date: {
         type: Date,
