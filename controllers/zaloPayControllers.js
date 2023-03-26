@@ -60,7 +60,7 @@ const generateZaloPayURL = async (masterReq, masterRes) => {
         })
         .then(res => {
             console.log(res.data);
-            masterreturn res.json(res.data);
+            return masterRes.json(res.data);
         })
         .catch(err => console.log(err));
 }
@@ -145,7 +145,7 @@ const generateZaloPayGatewayURL = async (masterReq, masterRes) => {
         })
         .then(res => {
             console.log(res.data);
-            masterreturn res.json(res.data);
+            return masterRes.json(res.data);
         })
         .catch(err => console.log(err));
 } 
