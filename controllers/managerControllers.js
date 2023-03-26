@@ -33,7 +33,7 @@ const reformAllManagers = async (req, res) => {
         managers = await Manager.find()
         .populate('roleID').exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: managers,
             length: managers.length,
@@ -41,7 +41,7 @@ const reformAllManagers = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -55,7 +55,7 @@ const getAllManagers = async (req, res) => {
         const managers = await Manager.find()
         .populate('roleID').exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: managers,
             length: managers.length,
@@ -63,7 +63,7 @@ const getAllManagers = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -87,14 +87,14 @@ const getManagerByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: manager,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -147,7 +147,7 @@ const addManager = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: manager,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -155,7 +155,7 @@ const addManager = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -200,7 +200,7 @@ const managerLogin = async (req, res) => {
             ...existedManager._doc
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: existedManager,
             token,
@@ -209,7 +209,7 @@ const managerLogin = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -271,7 +271,7 @@ const changePassword = async (req, res) => {
             });
         } 
 
-        res.json({
+        return res.json({
             success: true,
             data: manager,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -279,7 +279,7 @@ const changePassword = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -358,7 +358,7 @@ const editManager = async (req, res) => {
             });
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: manager,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -366,7 +366,7 @@ const editManager = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -393,7 +393,7 @@ const deleteManager = async (req, res) => {
 
         const manager = await Manager.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: manager,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -401,7 +401,7 @@ const deleteManager = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

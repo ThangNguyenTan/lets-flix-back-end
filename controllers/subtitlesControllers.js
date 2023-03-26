@@ -9,7 +9,7 @@ const getAllSubtitles = async (req, res) => {
     try {
         const subtitles = await Subtitle.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitles,
             length: subtitles.length,
@@ -17,7 +17,7 @@ const getAllSubtitles = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -39,14 +39,14 @@ const getSubtitleByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitle,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -61,7 +61,7 @@ const getSubtitlesByMovieID = async (req, res) => {
         const movie = await getMovieByID(movieID);
         const subtitles = await Subtitle.find({videoID: movie._id});
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitles,
             length: subtitles.length,
@@ -69,7 +69,7 @@ const getSubtitlesByMovieID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -84,7 +84,7 @@ const getSubtitlesByEpisodeID = async (req, res) => {
         const episode = await getEpisodeByID(episodeID);
         const subtitles = await Subtitle.find({videoID: episode._id});
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitles,
             length: subtitles.length,
@@ -92,7 +92,7 @@ const getSubtitlesByEpisodeID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -133,7 +133,7 @@ const addSubtitle = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: sub,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -141,7 +141,7 @@ const addSubtitle = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -192,7 +192,7 @@ const editSubtitle = async (req, res) => {
             ...req.body, last_modified_date
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitle,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -200,7 +200,7 @@ const editSubtitle = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -227,7 +227,7 @@ const deleteSubtitle = async (req, res) => {
 
         const subtitle = await Subtitle.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitle,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -235,7 +235,7 @@ const deleteSubtitle = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -270,7 +270,7 @@ const deleteSubtitleByMovieID = async (req, res) => {
             await Subtitle.findByIdAndDelete(subtitleItem._id);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitles,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -278,7 +278,7 @@ const deleteSubtitleByMovieID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -313,7 +313,7 @@ const deleteSubtitleByEpisodeID = async (req, res) => {
             await Subtitle.findByIdAndDelete(subtitleItem._id);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: subtitles,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -321,7 +321,7 @@ const deleteSubtitleByEpisodeID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

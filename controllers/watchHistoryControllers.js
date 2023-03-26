@@ -8,14 +8,14 @@ const getAllWatchHistory = async (req, res) => {
     try {
         const watchHistory = await WatchHistory.find().sort([['created_date', 'descending']]);
 
-        res.json({
+        return res.json({
             success: true,
             data: watchHistory,
             length: watchHistory.length
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -50,7 +50,7 @@ const getAllWatchHistoryByCustomerID = async (req, res) => {
             movieList.push(selectRecord);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: {
                 watchHistory,
@@ -63,7 +63,7 @@ const getAllWatchHistoryByCustomerID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -77,13 +77,13 @@ const getWatchHistoryByMovieIDAndCustomerID = async (req, res) => {
         const {customerID, movieID} = req.params;
         const watchHistory = await WatchHistory.findOne({customerID, movieID});
 
-        res.json({
+        return res.json({
             success: true,
             data: watchHistory
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -97,13 +97,13 @@ const getWatchHistoryByID = async (req, res) => {
         const {historyID} = req.params;
         const watchHistory = await WatchHistory.findById(historyID);
 
-        res.json({
+        return res.json({
             success: true,
             data: watchHistory,
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -125,7 +125,7 @@ const addWatchHistory = async (req, res) => {
         });
 
         if (existedWatchHistory) {
-            res.json({
+            return res.json({
                 success: true,
                 data: updatedWatchHistory,
                 message: `Successfully created ${A_OR_AN} ${APP_NAME}`
@@ -138,14 +138,14 @@ const addWatchHistory = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: watchHistory,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -159,14 +159,14 @@ const deleteWatchHistory = async (req, res) => {
         const {historyID} = req.params;
         const watchHistory = await WatchHistory.findByIdAndDelete(historyID);
 
-        res.json({
+        return res.json({
             success: true,
             data: watchHistory,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

@@ -10,7 +10,7 @@ const getAllPhotos = async (req, res) => {
     try {
         const photos = await Photo.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             length: photos.length,
@@ -18,7 +18,7 @@ const getAllPhotos = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -40,14 +40,14 @@ const getPhotoByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: photo,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -62,7 +62,7 @@ const getPhotosByMovieID = async (req, res) => {
         const movie = await getMovieByID(movieID);
         const photos = await Photo.find({recordID: movie._id});
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             length: photos.length,
@@ -70,7 +70,7 @@ const getPhotosByMovieID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -85,7 +85,7 @@ const getPhotosBySeriesID = async (req, res) => {
         const series = await getSeriesByID(seriesID);
         const photos = await Photo.find({recordID: series._id});
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             length: photos.length,
@@ -93,7 +93,7 @@ const getPhotosBySeriesID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -108,7 +108,7 @@ const getPhotosBySeasonID = async (req, res) => {
         const season = await getSeasonByID(seasonID);
         const photos = await Photo.find({recordID: season._id});
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             length: photos.length,
@@ -116,7 +116,7 @@ const getPhotosBySeasonID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -157,7 +157,7 @@ const addPhoto = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: photo,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -165,7 +165,7 @@ const addPhoto = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -216,7 +216,7 @@ const editPhoto = async (req, res) => {
             ...req.body, last_modified_date
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: photo,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -224,7 +224,7 @@ const editPhoto = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -251,7 +251,7 @@ const deletePhoto = async (req, res) => {
 
         const photo = await Photo.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: photo,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -259,7 +259,7 @@ const deletePhoto = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -294,7 +294,7 @@ const deletePhotoByMovieID = async (req, res) => {
             await Photo.findByIdAndDelete(phototem._id);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -302,7 +302,7 @@ const deletePhotoByMovieID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -337,7 +337,7 @@ const deletePhotoBySeriesID = async (req, res) => {
             await Photo.findByIdAndDelete(phototem._id);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -345,7 +345,7 @@ const deletePhotoBySeriesID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -380,7 +380,7 @@ const deletePhotoBySeasonID = async (req, res) => {
             await Photo.findByIdAndDelete(phototem._id);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: photos,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -388,7 +388,7 @@ const deletePhotoBySeasonID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

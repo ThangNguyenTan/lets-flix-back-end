@@ -65,7 +65,7 @@ const reformAllSeries = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -93,7 +93,7 @@ const getAllSeriesByGenre = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -142,7 +142,7 @@ const checkURLUsageSeries = async (req, res) => {
             }
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: {
                 series,
@@ -153,7 +153,7 @@ const checkURLUsageSeries = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -174,7 +174,7 @@ const getAllSeries = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -203,14 +203,14 @@ const getSeriesByID = async (req, res) => {
         let updatedSeries = await Series.findByIdAndUpdate(id, {imdbSeries})
         updatedSeries = await Series.findById(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: updatedSeries,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -226,14 +226,14 @@ const getSeriesByIMDB_ID = async (req, res) => {
         } = req.params;
         const series = await Series.findOne({IMDB_ID});
         
-        res.json({
+        return res.json({
             success: true,
             data: series,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -268,7 +268,7 @@ const addSeriesValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -314,7 +314,7 @@ const editSeriesValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -375,7 +375,7 @@ const addSeries = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: series,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -383,7 +383,7 @@ const addSeries = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -462,7 +462,7 @@ const editSeries = async (req, res) => {
 
         const series = await Series.findByIdAndUpdate(id, updatedSeriesObject);
 
-        res.json({
+        return res.json({
             success: true,
             data: series,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -470,7 +470,7 @@ const editSeries = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -497,7 +497,7 @@ const deleteSeries = async (req, res) => {
         const series = await Series.findByIdAndDelete(id);
         //await removeAllSeasonsBySeriesID(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: series,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -505,7 +505,7 @@ const deleteSeries = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

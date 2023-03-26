@@ -27,14 +27,14 @@ const getPlanByPrice = async (req, res) => {
             })
         }
  
-        res.json({
+        return res.json({
             success: true,
             data: plan,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -47,7 +47,7 @@ const getAllPlans = async (req, res) => {
     try {
         const plans = await Plan.find().sort({'price': 1});
 
-        res.json({
+        return res.json({
             success: true,
             data: plans,
             length: plans.length,
@@ -55,7 +55,7 @@ const getAllPlans = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -77,14 +77,14 @@ const getPlanByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: plan,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -122,7 +122,7 @@ const addPlan = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: plan,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -130,7 +130,7 @@ const addPlan = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -179,7 +179,7 @@ const editPlan = async (req, res) => {
             name, price, priceVND: usdToVnd(price), description, durationInDays, last_modified_date
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: plan,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -187,7 +187,7 @@ const editPlan = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -211,7 +211,7 @@ const deletePlan = async (req, res) => {
 
         const plan = await Plan.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: plan,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -219,7 +219,7 @@ const deletePlan = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

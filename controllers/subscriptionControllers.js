@@ -20,7 +20,7 @@ const getAllSubscriptions = async (req, res) => {
         .populate('planID')
         .exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: subscriptions,
             length: subscriptions.length,
@@ -28,7 +28,7 @@ const getAllSubscriptions = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -52,14 +52,14 @@ const getSubscriptionByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: subscription,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -81,14 +81,14 @@ const getSubscriptionByCustomerID = async (req, res) => {
         .populate('planID')
         .exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: subscription,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -122,7 +122,7 @@ const getSubscriptionStatusByCustomerID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: "active",
             subscription,
@@ -130,7 +130,7 @@ const getSubscriptionStatusByCustomerID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -169,7 +169,7 @@ const addSubscription = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: subscription,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -177,7 +177,7 @@ const addSubscription = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -223,7 +223,7 @@ const editSubscription = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: subscription,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -231,7 +231,7 @@ const editSubscription = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -257,7 +257,7 @@ const deleteSubscription = async (req, res) => {
 
         const subscription = await Subscription.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: subscription,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -265,7 +265,7 @@ const deleteSubscription = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

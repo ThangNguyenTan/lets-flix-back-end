@@ -53,7 +53,7 @@ const paypalCallback = async (req, res) => {
                             }).save();
                         }
     
-                        res.json({
+                        return res.json({
                             success: true,
                             data: paypalPaymentRes,
                             status: 200
@@ -70,7 +70,7 @@ const paypalCallback = async (req, res) => {
         
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

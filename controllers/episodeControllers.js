@@ -66,7 +66,7 @@ const reformAllEpisodes = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -79,7 +79,7 @@ const getAllEpisodes = async (req, res) => {
     try {
         const episodes = await Episode.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: episodes,
             length: episodes.length,
@@ -87,7 +87,7 @@ const getAllEpisodes = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -103,14 +103,14 @@ const getEpisodeByID = async (req, res) => {
         } = req.params;
         const episode = await Episode.findById(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: episode,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -128,7 +128,7 @@ const getEpisodeBySeasonID = async (req, res) => {
             seasonID
         }).sort({episodeNum: 1});
 
-        res.json({
+        return res.json({
             success: true,
             data: episodes,
             length: episodes.length,
@@ -136,7 +136,7 @@ const getEpisodeBySeasonID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -192,7 +192,7 @@ const checkURLUsageEpisode = async (req, res) => {
             }
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: {
                 episodes,
@@ -203,7 +203,7 @@ const checkURLUsageEpisode = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -234,7 +234,7 @@ const addEpsiodeValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -272,7 +272,7 @@ const editEpsiodeValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -300,7 +300,7 @@ const addEpisode = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: episode,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -308,7 +308,7 @@ const addEpisode = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -342,7 +342,7 @@ const editEpisode = async (req, res) => {
 
         const episode = await Episode.findByIdAndUpdate(id, updatedEpisodeObject);
 
-        res.json({
+        return res.json({
             success: true,
             data: episode,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -350,7 +350,7 @@ const editEpisode = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -368,7 +368,7 @@ const deleteEpisode = async (req, res) => {
         const episode = await Episode.findByIdAndDelete(id);
         //await removeSubtitleByVideoURL(episode.episodeURL);
 
-        res.json({
+        return res.json({
             success: true,
             data: episode,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -376,7 +376,7 @@ const deleteEpisode = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -397,7 +397,7 @@ const deleteEpisodeWithSeasonIDAndEpNum = async (req, res) => {
             episodeNum: parseInt(epNum)
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: episode,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -405,7 +405,7 @@ const deleteEpisodeWithSeasonIDAndEpNum = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

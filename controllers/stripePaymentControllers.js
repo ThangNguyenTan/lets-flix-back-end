@@ -59,12 +59,12 @@ const stripePay = async (req, res) => {
             }
         });
 
-        res.json({
+        return res.json({
             client_secret: paymentIntent["client_secret"]
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -83,12 +83,12 @@ const getStripePaymentByID = async (req, res) => {
             paymentIntentID
         );
 
-        res.json({
+        return res.json({
             paymentIntent
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

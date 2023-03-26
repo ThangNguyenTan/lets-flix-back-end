@@ -76,7 +76,7 @@ const reformAllMovies = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -100,7 +100,7 @@ const getAllMovies = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -128,7 +128,7 @@ const getAllMoviesByGenre = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -184,7 +184,7 @@ const checkURLUsageMovie = async (req, res) => {
             }
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: {
                 movie,
@@ -196,7 +196,7 @@ const checkURLUsageMovie = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -239,14 +239,14 @@ const getMovieByID = async (req, res) => {
         console.log(movieURLRef)
         */
 
-        res.json({
+        return res.json({
             success: true,
             data: updatedMovie,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -262,14 +262,14 @@ const getMovieByIMDB_ID = async (req, res) => {
         } = req.params;
         const movie = await Movie.findOne({IMDB_ID});
         
-        res.json({
+        return res.json({
             success: true,
             data: movie,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -304,7 +304,7 @@ const addMovieValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -350,7 +350,7 @@ const editMovieValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -420,7 +420,7 @@ const addMovie = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: movie,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -428,7 +428,7 @@ const addMovie = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -527,7 +527,7 @@ const editMovie = async (req, res) => {
         }
         const movie = await Movie.findByIdAndUpdate(id, updatedMovieObject);
 
-        res.json({
+        return res.json({
             success: true,
             data: movie,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -535,7 +535,7 @@ const editMovie = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -562,7 +562,7 @@ const deleteMovie = async (req, res) => {
         const movie = await Movie.findByIdAndDelete(id);
         //await removeSubtitleByVideoURL(movie.movieURL);
 
-        res.json({
+        return res.json({
             success: true,
             data: movie,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -570,7 +570,7 @@ const deleteMovie = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

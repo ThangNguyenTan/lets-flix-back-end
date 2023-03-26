@@ -32,7 +32,7 @@ const getCustomerDashboardData = async (req, res) => {
 
         console.log(subscribedCustomer);
  
-        res.json({
+        return res.json({
             success: true,
             data: {
                 totalCustomer: totalCustomer.length,
@@ -44,7 +44,7 @@ const getCustomerDashboardData = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -122,7 +122,7 @@ const getRevenueData = async (req, res) => {
             }
         }
  
-        res.json({
+        return res.json({
             success: true,
             data: {
                 monthlyRevenueChartData,
@@ -132,7 +132,7 @@ const getRevenueData = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -208,7 +208,7 @@ const getNewCustomerData = async (req, res) => {
             }
         }
  
-        res.json({
+        return res.json({
             success: true,
             data: {
                 monthlyNewUserChartData,
@@ -218,7 +218,7 @@ const getNewCustomerData = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

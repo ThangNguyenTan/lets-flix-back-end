@@ -24,14 +24,14 @@ const removeAllReviews = async (req, res) => {
     try {
         const reviews = await Review.deleteMany();
 
-        res.json({
+        return res.json({
             success: true,
             data: reviews,
             length: reviews.length
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -44,14 +44,14 @@ const getAllReviews = async (req, res) => {
     try {
         const reviews = await Review.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: reviews,
             length: reviews.length
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -67,13 +67,13 @@ const getReviewByID = async (req, res) => {
         } = req.params;
         const review = await Review.findById(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: review
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -93,13 +93,13 @@ const getReviewByCustomerIDAndMovieID = async (req, res) => {
             customerID
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: review
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -117,13 +117,13 @@ const getReviewByCustomerID = async (req, res) => {
             customerID
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: review
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -139,14 +139,14 @@ const getReviewsByMovieID = async (req, res) => {
         } = req.params;
         const reviews = await Review.find({movieID});
 
-        res.json({
+        return res.json({
             success: true,
             data: reviews,
             length: reviews.length
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -243,14 +243,14 @@ const addReview = async (req, res) => {
             await changeRatingOfSeries(movieID)
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: review,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -296,14 +296,14 @@ const editReview = async (req, res) => {
 
         const updatedReview = await Review.findById(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: updatedReview,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -330,14 +330,14 @@ const deleteReview = async (req, res) => {
             await changeRatingOfMovie(movieID)
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: review,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

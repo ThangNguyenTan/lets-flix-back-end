@@ -6,14 +6,14 @@ const getAllManagerRoles = async (req, res) => {
     try {
         const managerRoles = await ManagerRole.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: managerRoles,
             length: managerRoles.length
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -27,13 +27,13 @@ const getManagerRoleByID = async (req, res) => {
         const {id} = req.params;
         const managerRole = await ManagerRole.findById(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: managerRole
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -51,14 +51,14 @@ const addManagerRole = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: managerRole,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -76,14 +76,14 @@ const editManagerRole = async (req, res) => {
             role, last_modified_date
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: managerRole,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -97,14 +97,14 @@ const deleteManagerRole = async (req, res) => {
         const {id} = req.params;
         const managerRole = await ManagerRole.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: managerRole,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

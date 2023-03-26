@@ -71,7 +71,7 @@ const reformAllSeasons = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -120,7 +120,7 @@ const checkURLUsageSeasons = async (req, res) => {
             }
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: {
                 season,
@@ -131,7 +131,7 @@ const checkURLUsageSeasons = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -152,7 +152,7 @@ const getAllSeasons = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -176,14 +176,14 @@ const getSeasonByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: season,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -202,7 +202,7 @@ const getSeasonsBySeriesID = async (req, res) => {
             return seasonA.seasonNum - seasonB.seasonNum;
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: seasons,
             length: seasons.length,
@@ -210,7 +210,7 @@ const getSeasonsBySeriesID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -241,7 +241,7 @@ const addSeasonValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -279,7 +279,7 @@ const editSeasonValidation = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -339,7 +339,7 @@ const addSeason = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: season,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -347,7 +347,7 @@ const addSeason = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -411,7 +411,7 @@ const editSeason = async (req, res) => {
 
         const season = await Season.findByIdAndUpdate(id, updatedSeasonObject);
 
-        res.json({
+        return res.json({
             success: true,
             data: season,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -419,7 +419,7 @@ const editSeason = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -446,7 +446,7 @@ const deleteSeason = async (req, res) => {
         const season = await Season.findByIdAndDelete(id);
         //await removeAllEpisodeBySeasonID(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: season,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -454,7 +454,7 @@ const deleteSeason = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

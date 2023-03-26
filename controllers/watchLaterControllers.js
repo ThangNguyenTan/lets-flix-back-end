@@ -8,14 +8,14 @@ const getAllWatchLaters = async (req, res) => {
     try {
         const watchLaters = await WatchLater.find().sort([['created_date', 'descending']]);
 
-        res.json({
+        return res.json({
             success: true,
             data: watchLaters,
             length: watchLaters.length
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -46,7 +46,7 @@ const getAllWatchLatersByCustomerID = async (req, res) => {
             movieList.push(selectRecord);
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: {
                 watchLaters,
@@ -57,7 +57,7 @@ const getAllWatchLatersByCustomerID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -71,13 +71,13 @@ const getAllWatchLatersByMovieIDAndCustomerID = async (req, res) => {
         const {customerID, movieID} = req.params;
         const watchLater = await WatchLater.findOne({customerID, movieID});
 
-        res.json({
+        return res.json({
             success: true,
             data: watchLater
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -90,13 +90,13 @@ const getAllWatchLatersByID = async (req, res) => {
     try {
         const watchLater = await WatchLater.findById(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: watchLater,
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -114,14 +114,14 @@ const addWatchLater = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: watchLater,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -139,14 +139,14 @@ const editWatchLater = async (req, res) => {
             movieID, customerID, last_modified_date
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: watchLater,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -160,14 +160,14 @@ const deleteWatchLater = async (req, res) => {
         const {id} = req.params;
         const watchLater = await WatchLater.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: watchLater,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

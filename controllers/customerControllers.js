@@ -1012,7 +1012,7 @@ const customerLogin = async (req, res) => {
       session
     }
 
-    res.json({
+    return res.json({
       success: true,
       data: returnedCustomerItem,
       message: `Successfully logged in`,
@@ -1021,7 +1021,7 @@ const customerLogin = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1084,7 +1084,7 @@ const customerSignup = async (req, res) => {
 
     sendValidationEmail(req, customer);
 
-    res.json({
+    return res.json({
       success: true,
       data: returnedCustomerItem,
       message: `Successfully signed up`,
@@ -1092,7 +1092,7 @@ const customerSignup = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1113,7 +1113,7 @@ const validateCustomer = async (req, res) => {
     res.redirect(CURRENT_CLIENT_URL);
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1150,7 +1150,7 @@ const resetPasswordTokenRequest = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1196,7 +1196,7 @@ const changePassword = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1238,7 +1238,7 @@ const resetPassword = async (req, res) => {
       password
     });
 
-    res.json({
+    return res.json({
       success: true,
       data: customer,
       message: `Successfully resetted the password`,
@@ -1246,7 +1246,7 @@ const resetPassword = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1291,7 +1291,7 @@ const getResetPasswordToken = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1313,7 +1313,7 @@ const getAllCustomers = async (req, res) => {
       };
     }
 
-    res.json({
+    return res.json({
       success: true,
       data: customers,
       length: customers.length,
@@ -1321,7 +1321,7 @@ const getAllCustomers = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1352,14 +1352,14 @@ const getCustomerByID = async (req, res) => {
       stripeCustomer
     }
 
-    res.json({
+    return res.json({
       success: true,
       data: returnedCustomerItem,
       status: 200
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1422,7 +1422,7 @@ const addCustomer = async (req, res) => {
       stripeCustomer
     }
 
-    res.json({
+    return res.json({
       success: true,
       data: returnedCustomerItem,
       message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -1430,7 +1430,7 @@ const addCustomer = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1524,7 +1524,7 @@ const editCustomer = async (req, res) => {
       stripeCustomer
     }
 
-    res.json({
+    return res.json({
       success: true,
       data: returnedCustomerItem,
       message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -1532,7 +1532,7 @@ const editCustomer = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,
@@ -1572,7 +1572,7 @@ const deleteCustomer = async (req, res) => {
       stripeCustomer
     }
 
-    res.json({
+    return res.json({
       success: true,
       data: returnedCustomerItem,
       message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -1580,7 +1580,7 @@ const deleteCustomer = async (req, res) => {
     })
   } catch (error) {
     console.log(error);
-    res.json({
+    return res.json({
       success: false,
       data: null,
       message: `Internal Server Error`,

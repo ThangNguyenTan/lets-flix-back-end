@@ -7,7 +7,7 @@ const getAllGenres = async (req, res) => {
     try {
         const genres = await Genre.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: genres,
             length: genres.length,
@@ -15,7 +15,7 @@ const getAllGenres = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -37,14 +37,14 @@ const getGenreByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: genre,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -82,7 +82,7 @@ const addGenre = async (req, res) => {
             last_modified_date: Date.now()
         }).save();
 
-        res.json({
+        return res.json({
             success: true,
             data: genre,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -90,7 +90,7 @@ const addGenre = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -139,7 +139,7 @@ const editGenre = async (req, res) => {
             name, last_modified_date
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: genre,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -147,7 +147,7 @@ const editGenre = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -171,7 +171,7 @@ const deleteGenre = async (req, res) => {
 
         const genre = await Genre.findByIdAndDelete(id);
 
-        res.json({
+        return res.json({
             success: true,
             data: genre,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -179,7 +179,7 @@ const deleteGenre = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

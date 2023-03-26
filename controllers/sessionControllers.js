@@ -11,7 +11,7 @@ const getAllSessions = async (req, res) => {
 
         const sessions = await Session.find();
 
-        res.json({
+        return res.json({
             success: true,
             data: sessions,
             length: sessions.length,
@@ -19,7 +19,7 @@ const getAllSessions = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -36,7 +36,7 @@ const getSessionByID = async (req, res) => {
         const session = await Session.findById(sessionID);
 
         if (!session) {
-            res.json({
+            return res.json({
                 success: true,
                 data: null,
                 message: `Session does not exist`,
@@ -44,14 +44,14 @@ const getSessionByID = async (req, res) => {
             })
         }
 
-        res.json({
+        return res.json({
             success: true,
             data: session,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -67,7 +67,7 @@ const refreshSession = async (req, res) => {
         let session = await Session.findById(sessionID);
 
         if (!session) {
-            res.json({
+            return res.json({
                 success: true,
                 data: null,
                 message: `Session does not exist`,
@@ -80,14 +80,14 @@ const refreshSession = async (req, res) => {
             //expiry_date: new Date(Date.now() + 60 * 1000 * 2),
         });
 
-        res.json({
+        return res.json({
             success: true,
             data: session,
             status: 200
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -102,7 +102,7 @@ const deleteSession = async (req, res) => {
         let session = await Session.findById(sessionID);
 
         if (!session) {
-            res.json({
+            return res.json({
                 success: true,
                 data: null,
                 message: `Session does not exist`,
@@ -119,7 +119,7 @@ const deleteSession = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,

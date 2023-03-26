@@ -10,7 +10,7 @@ const getAllComments = async (req, res) => {
         .populate('customerID')
         .exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: comments,
             length: comments.length,
@@ -18,7 +18,7 @@ const getAllComments = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -35,7 +35,7 @@ const getCommentByCustomerID = async (req, res) => {
         .populate('customerID')
         .exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: comments,
             length: comments.length,
@@ -43,7 +43,7 @@ const getCommentByCustomerID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -60,7 +60,7 @@ const getCommentByMovieID = async (req, res) => {
         .populate('customerID')
         .exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: comments,
             length: comments.length,
@@ -68,7 +68,7 @@ const getCommentByMovieID = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -100,7 +100,7 @@ const addComment = async (req, res) => {
         .populate('customerID')
         .exec();
 
-        res.json({
+        return res.json({
             success: true,
             data: comment,
             message: `Successfully created ${A_OR_AN} ${APP_NAME}`,
@@ -108,7 +108,7 @@ const addComment = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -145,7 +145,7 @@ const editComment = async (req, res) => {
         const last_modified_date = Date.now();
         const comment = await Comment.findByIdAndUpdate(commentID, {customerID, movieSeriesID, content});
 
-        res.json({
+        return res.json({
             success: true,
             data: comment,
             message: `Successfully updated ${A_OR_AN} ${APP_NAME}`,
@@ -153,7 +153,7 @@ const editComment = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
@@ -177,7 +177,7 @@ const deleteComment = async (req, res) => {
 
         const comment = await Comment.findByIdAndDelete(commentID);
 
-        res.json({
+        return res.json({
             success: true,
             data: comment,
             message: `Successfully deleted ${A_OR_AN} ${APP_NAME}`,
@@ -185,7 +185,7 @@ const deleteComment = async (req, res) => {
         })
     } catch (error) {
         console.log(error);
-        res.json({
+        return res.json({
             success: false,
             data: null,
             message: `Internal Server Error`,
